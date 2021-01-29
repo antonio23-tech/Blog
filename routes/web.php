@@ -13,8 +13,17 @@ use App\Http\Controllers\PostController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+// mostrar todos los posts
 Route::get('/',[PostController::class,'index'])->name('post.index');
+
+// mostrar un elemento (un post)
+Route::get('posts/{post}',[PostController::class,'show'])->name('post.show');
+
+// mostar elementos por categorias
+Route::get('category/{category}',[PostController::class,'category'])->name('post.category');
+
+// mostrar elemento por medio de etiquetas
+Route::get('tag/{tag}',[PostController::class,'tag'])->name('post.tag');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
