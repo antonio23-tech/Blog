@@ -1,11 +1,11 @@
 <div class="card">
-    <div class="card-header">
-        <input wire:model="search" class="form-control" placeholder="Ingrese el nombre de un post" type="text">
-
-        {{-- validacion de que exista algun post --}}
-        @if ($posts->count())
-              
+    <div class="card-header">  
+        <input wire:model="search" class="form-control" placeholder="Ingrese el nombre de un post" type="text">        
     </div>
+
+    {{-- validacion de que exista algun post --}}
+    @if ($posts->count())
+
     <div class="card-body">
         <table class="table table-striped">
             <thead>
