@@ -8,6 +8,7 @@ use App\Models\Post;
 use App\Models\Category;
 use App\Models\Tag;
 use App\Http\Requests\PostStoreRequest;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -43,7 +44,20 @@ class PostController extends Controller
      */
     public function store(PostStoreRequest $request)
     {
+        // se inserta informacion de los botones a la tabla posts excepto tags
         $post=Post::create($request->all());
+
+        // validar si se estan enviando una imagen
+        if($request->file('file')){
+            $url=Storage::put('posts', $request->file('file'));
+
+            // se inserta la imagen
+            $post->image()->create([
+                 'url'=>$url
+            ]);
+        }
+
+        // validar las etiquetas
         if($request->tags){
             $post->tags()->attach($request->tags);
         }
