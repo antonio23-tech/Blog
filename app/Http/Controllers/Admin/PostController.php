@@ -124,7 +124,7 @@ class PostController extends Controller
 
          // validar las etiquetas
          if($request->tags){
-            $post->tags()->attach($request->tags);
+            $post->tags()->sync($request->tags);
         }
         return redirect()->route('admin.posts.edit',$post)->with('info','El post se actualizo correctamente');
         
@@ -138,6 +138,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return redirect()->route('admin.posts.index')->with('info','El post ha sido eliminado correctamente');
     }
 }
